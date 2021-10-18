@@ -90,7 +90,7 @@ module.exports = {
         return addedCar
     },
 
-    UpdateCar: async(data) => {
+    UpdateCar: async(id, data) => {
       let updatedCar = await updateCar(id, data) 
       return updatedCar
     },

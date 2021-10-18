@@ -90,7 +90,7 @@ module.exports = {
         return addedDriver
     },
 
-    UpdateDriver: async(data) => {
+    UpdateDriver: async(id, data) => {
       let updatedDriver = await updateDriver(id, data) 
       return updatedDriver
     },

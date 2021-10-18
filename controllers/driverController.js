@@ -54,7 +54,7 @@ function getAllDrivers() {
           console.log(err);
           reject("Can't update driver");
         } else {
-          resolve("Driver update OK");
+          resolve(driver);
         }
       });
     })

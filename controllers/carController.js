@@ -54,7 +54,7 @@ function getAllCars() {
           console.log(err);
           reject("Can't update car");
         } else {
-          resolve("Car update OK");
+          resolve(car);
         }
       });
     })

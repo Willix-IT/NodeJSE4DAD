@@ -107,7 +107,7 @@ app.put('/car/:id', async function (req, res, next) {
 })
 
 app.get('/driver/:id', async function (req, res, next) {
-    let oneDriver = await driver.GetOneDriver(req.params.id)
+    let oneDriver = await driverController.GetOneDriver(req.params.id)
         .then((result) => {
             return (result);
         })

@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const carController = require('./controllers/carController')
-const driverController = require('./controllers/carController')
+const driverController = require('./controllers/driverController')
 const cors = require('cors');
 
 

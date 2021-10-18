@@ -9,6 +9,7 @@ const DriverSchema = new Schema({
     immatriculation: { type: String, default: null, required: true },
     marque: { type:String, default: null }
   },
+  image: {type: String, default: null}
 }, { timestamps: true });
 
 module.exports = mongoose.model('Driver', DriverSchema);

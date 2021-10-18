@@ -2,13 +2,14 @@ const express = require('express');
 const path = require('path');
 const carController = require('./controllers/carController')
 const driverController = require('./controllers/carController')
+const cors = require('cors');
 
 
 
 ////////////////////////////////////////////////////////////////////////////// DB CONNECTION //////////////////////////////////////////////////////////////
 const mongoose = require('mongoose');
 const Connect = async () => {
-    let url = "mongodb://127.0.0.1/NodeJSCar";
+    let url = "mongodb+srv://admin:P%40ssword1234@cluster0.zsclg.mongodb.net/NodeJSCar?retryWrites=true&w=majority";
     try {
         let client = await mongoose.connect(url);
         console.log("Database is connected!");
@@ -25,6 +26,9 @@ Connect();
 
 
 const app = express();
+app.use(cors({
+    origin: "*"
+  }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const port = process.env.PORT || 3000;

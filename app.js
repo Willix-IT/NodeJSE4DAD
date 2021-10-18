@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const carController = require('./controllers/carController')
 const driverController = require('./controllers/carController')
+const cors = require('cors');
 
 
 
@@ -25,6 +26,9 @@ Connect();
 
 
 const app = express();
+app.use(cors({
+    origin: "*"
+  }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 const port = process.env.PORT || 3000;

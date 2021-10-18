@@ -67,7 +67,7 @@ app.post('/car', async function (req, res, next) {
     res.json(addedCar)
 })
 
-app.put('/car/:id', function (req, res, next) {
+app.put('/car/:id', async function (req, res, next) {
     let updatedCar = await carController.UpdateCar(req.params.id, req.body)
     .then((result) => {
         res.status(200).send("Update OK")
@@ -77,7 +77,7 @@ app.put('/car/:id', function (req, res, next) {
     })
   })
 
-  app.delete('/car/:id', function (req, res, next) {
+  app.delete('/car/:id', async function (req, res, next) {
     let deletedCar = await carController.DeleteCar(req.params.id)
     .then((result) => {
         res.status(200).send("Deletion OK")
@@ -124,7 +124,7 @@ app.post('/driver', async function (req, res, next) {
     res.json(addedDriver)
 })
 
-app.put('/driver/:id', function (req, res, next) {
+app.put('/driver/:id', async function (req, res, next) {
     let updatedDriver = await driverController.UpdateDriver(req.params.id, req.body)
     .then((result) => {
         res.status(200).send("Update OK")
@@ -134,7 +134,7 @@ app.put('/driver/:id', function (req, res, next) {
     })
   })
 
-  app.delete('/driver/:id', function (req, res, next) {
+  app.delete('/driver/:id', async function (req, res, next) {
     let deletedDriver = await driverController.DeleteDriver(req.params.id)
     .then((result) => {
         res.status(200).send("Deletion OK")

@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
-const gameController = require('./controllers/gameController')
+const carController = require('./controllers/carController')
+const driverController = require('./controllers/carController')
 
 
 
 ////////////////////////////////////////////////////////////////////////////// DB CONNECTION //////////////////////////////////////////////////////////////
 const mongoose = require('mongoose');
 const Connect = async () => {
-    let url = "mongodb://127.0.0.1/NodeJSGame";
+    let url = "mongodb://127.0.0.1/NodeJSCar";
     try {
         let client = await mongoose.connect(url);
         console.log("Database is connected!");
@@ -29,11 +30,11 @@ app.use(express.urlencoded({ extended: false }));
 const port = process.env.PORT || 3000;
 
 
-////////////////////////////////////////////////////////////////////////////// APP ROUTES //////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////// APP ROUTES CARS //////////////////////////////////////////////////////////////
 
 
-app.get('/GetAllGames', async function (req, res, next) {
-    let allGames = await gameController.GetAllGames()
+app.get('/cars', async function (req, res, next) {
+    let allCars = await carController.GetAllCars()
         .then((result) => {
             return (result);
         })
@@ -41,30 +42,107 @@ app.get('/GetAllGames', async function (req, res, next) {
             return (error)
         })
 
-    res.json(allGames)
+    res.json(allCars)
 })
 
-app.get('/GetOneGame/:id', async function (req, res, next) {
-    let oneGame = await gameController.GetOneGame(req.params.id)
+app.get('/car/:id', async function (req, res, next) {
+    let oneCar = await carController.GetOneCar(req.params.id)
         .then((result) => {
             return (result);
         })
         .catch((error) => {
             return (error)
         })
-    res.json(oneGame)
+    res.json(oneCar)
 })
 
-app.post('/addGame', async function (req, res, next) {
-    let addedGame = await gameController.AddGame(req.body)
+app.post('/car', async function (req, res, next) {
+    let addedCar = await carController.AddCar(req.body)
+        .then((result) => {
+            return result;
+        })
+        .catch((error) => {
+            return error
+        })
+    res.json(addedCar)
+})
+
+app.put('/car/:id', function (req, res, next) {
+    let updatedCar = await carController.UpdateCar(req.params.id, req.body)
+    .then((result) => {
+        res.status(200).send("Update OK")
+    })
+    .catch((error) => {
+        res.status(400).send(error)
+    })
+  })
+
+  app.delete('/car/:id', function (req, res, next) {
+    let deletedCar = await carController.DeleteCar(req.params.id)
+    .then((result) => {
+        res.status(200).send("Deletion OK")
+    })
+    .catch((error) => {
+        res.status(400).send(error)
+    })
+  })
+
+
+  ////////////////////////////////////////////////////////////////////////////// APP ROUTES DRIVERS //////////////////////////////////////////////////////////////
+
+  app.get('/drivers', async function (req, res, next) {
+    let allDrivers = await driverController.GetAllDrivers()
         .then((result) => {
             return (result);
         })
         .catch((error) => {
             return (error)
         })
-    res.json(addedGame)
+
+    res.json(allDrivers)
 })
+
+app.get('/driver/:id', async function (req, res, next) {
+    let oneDriver = await driver.GetOneDriver(req.params.id)
+        .then((result) => {
+            return (result);
+        })
+        .catch((error) => {
+            return (error)
+        })
+    res.json(oneDriver)
+})
+
+app.post('/driver', async function (req, res, next) {
+    let addedDriver = await driverController.AddDriver(req.body)
+        .then((result) => {
+            return result;
+        })
+        .catch((error) => {
+            return error
+        })
+    res.json(addedDriver)
+})
+
+app.put('/driver/:id', function (req, res, next) {
+    let updatedDriver = await driverController.UpdateDriver(req.params.id, req.body)
+    .then((result) => {
+        res.status(200).send("Update OK")
+    })
+    .catch((error) => {
+        res.status(400).send(error)
+    })
+  })
+
+  app.delete('/driver/:id', function (req, res, next) {
+    let deletedDriver = await driverController.DeleteDriver(req.params.id)
+    .then((result) => {
+        res.status(200).send("Deletion OK")
+    })
+    .catch((error) => {
+        res.status(400).send(error)
+    })
+  })
 
 app.listen(port, () => {
     console.log('Server app listening on port ' + port);
